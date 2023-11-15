@@ -57,47 +57,50 @@ while (!jeKonec)
                     break;
                 }
             case 3:
-                Console.WriteLine("1 - vypsat osoby dle pořadí v kartrotéce.");
-                Console.WriteLine("2 - vypsat osoby dle abecedy.");
-                Console.WriteLine("3 - vypsat osoby dle roku narození.");
+                {
+                    Console.WriteLine("1 - vypsat osoby dle pořadí v kartrotéce.");
+                    Console.WriteLine("2 - vypsat osoby dle abecedy.");
+                    Console.WriteLine("3 - vypsat osoby dle roku narození.");
 
-                int volba2 = Convert.ToInt32(Console.ReadLine());
+                    int volba2 = Convert.ToInt32(Console.ReadLine());
 
-                if (volba2 < 1 || volba2 > 3)
-                { Console.WriteLine("Nebylo zadáno validní číslo. Prosím zadejte číslo od 1 do 3."); }
-                else {
-                    switch (volba2)
+                    if (volba2 < 1 || volba2 > 3)
+                    { Console.WriteLine("Nebylo zadáno validní číslo. Prosím zadejte číslo od 1 do 3."); }
+                    else
                     {
-                        case 1:
-                            {
-                                int i = 0;
-                                foreach (var o in kartoteka)
+                        switch (volba2)
+                        {
+                            case 1:
                                 {
-                                    Console.WriteLine($"{i}\t{o.Key}\t{o.Value}");
-                                    i++;
+                                    int i = 0;
+                                    foreach (var o in kartoteka)
+                                    {
+                                        Console.WriteLine($"{i}\t{o.Key}\t{o.Value}");
+                                        i++;
+                                    }
                                 }
-                            }
-                            break;
-                        case 2:
-                            {
-                                foreach (var o in kartoteka.OrderBy(o => o.Key))
+                                break;
+                            case 2:
                                 {
-                                    Console.WriteLine($"{o.Key}\t{o.Value}");
+                                    foreach (var o in kartoteka.OrderBy(o => o.Key))
+                                    {
+                                        Console.WriteLine($"{o.Key}\t{o.Value}");
+                                    }
                                 }
-                            }
-                            break;
+                                break;
 
-                        case 3:
-                            {
-                                foreach (var o in kartoteka.OrderBy(o => o.Value))
+                            case 3:
                                 {
-                                    Console.WriteLine($"{o.Value} - {o.Key}");
+                                    foreach (var o in kartoteka.OrderBy(o => o.Value))
+                                    {
+                                        Console.WriteLine($"{o.Value} - {o.Key}");
+                                    }
                                 }
-                            }
-                            break;
+                                break;
+                        }
                     }
+                    break;
                 }
-                break;
 
             case 4:
                 {
@@ -144,7 +147,40 @@ while (!jeKonec)
                 }
             case 5:
                 {
+                    Console.WriteLine("1 - počet osob dle roku narození");
+                    Console.WriteLine("2 - nejstarší osoba v kartotéce");
+                    Console.WriteLine("3 - pouze osoby narozené po roce 1990");
+                    int volba3 = Convert.ToInt16(Console.ReadLine());
+                    if (volba3 < 1 || volba3 > 3)
+                    {
+                        Console.WriteLine("Nebylo zadáno validní číslo. Prosím zadejte číslo od 1 do 3.");
+                    }
+                    else
+                    {
+                        switch (volba3)
+                        {
+                            case 1:
+                                {
+                                    var skupinyDleVeku = kartoteka.GroupBy(c => c.Value);
 
+                                    foreach (var skupina in skupinyDleVeku)
+                                    {
+                                        Console.WriteLine($"Osoby narozené v roce {skupina.Key}:");
+                                        foreach (var jeden in skupina)
+                                        {
+                                            Console.WriteLine($"  {jeden.Key}");
+                                        }
+                                    }
+                                }
+                                break;
+                            case 2:
+                                {
+
+                                }
+                                break;
+                        }
+                            
+                    }
                 }
                 break;
         }
